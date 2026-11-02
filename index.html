@@ -22,15 +22,23 @@
 
     <h1 class="heading" id="heading">Bingo Challenge 1</h1>
 
-    <div class="equation-box">
+    <div class="equation-box" id="equationBox">
       <div class="equation" id="equation" aria-live="polite"></div>
     </div>
-    <p class="strategy" id="strategy" aria-live="polite"></p>
-    <p class="tagline">Think of a double that helps!</p>
+    <div class="timer-badge" id="timerBadge" hidden></div>
+    <div class="timer-bar" id="timerBar" hidden><div class="timer-fill" id="timerFill"></div></div>
+    <div class="cheer" id="cheer" hidden></div>
+    <p class="tagline" id="tagline">Think of a double that helps!</p>
+    <div class="strategy" id="strategy" aria-live="polite" hidden>
+      <p class="strategy-line" id="strategyKnow"></p>
+      <p class="strategy-line" id="strategyStep"></p>
+      <div class="strategy-box" id="strategyBox"></div>
+    </div>
   </main>
 
   <nav class="controls" aria-label="Challenge controls">
     <button class="btn" id="prevBtn" title="Previous Challenge (Left arrow)">&larr; Previous</button>
+    <button class="btn" id="timerBtn" title="Think Time countdown (T)">&#9201; Think Time</button>
     <button class="btn" id="answerBtn" title="Show / Hide Answer (Enter)">Show Answer</button>
     <button class="btn" id="nextBtn" title="Next Challenge (Right arrow or Space)">Next Challenge &rarr;</button>
     <button class="btn" id="resetBtn" title="Restart from Bingo Challenge 1">Reset</button>
@@ -39,11 +47,22 @@
   <div class="status" id="status"></div>
 
   <div class="corner-tools">
+    <button class="btn bingo-btn" id="bingoBtn" title="Someone got BINGO! (B)">&#127881; BINGO!</button>
+    <button class="btn icon-btn" id="soundBtn" title="Sound on/off (M)" aria-label="Toggle sound">&#128266;</button>
     <button class="btn icon-btn" id="settingsBtn" title="Settings: Bingo Mode / All Questions" aria-label="Settings">&#9881;</button>
     <button class="btn icon-btn" id="fullscreenBtn" title="Fullscreen (F)" aria-label="Toggle fullscreen">&#x26F6;</button>
   </div>
 
   <div class="toast" id="toast" role="status"></div>
+
+  <canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
+
+  <div class="bingo-burst" id="bingoBurst" hidden>
+    <div class="bingo-word" aria-label="BINGO!">
+      <span>B</span><span>I</span><span>N</span><span>G</span><span>O</span><span>!</span>
+    </div>
+    <p class="bingo-sub">We have a winner! &#127942;</p>
+  </div>
 
   <!-- Settings -->
   <div class="overlay" id="settingsOverlay" hidden>
@@ -85,10 +104,30 @@
         <button class="btn" type="button" id="settingsApply">Apply &amp; Restart</button>
       </div>
 
+      <div class="extras">
+        <h3>Fun extras</h3>
+        <p class="hint">These change straight away (no restart).</p>
+        <label><input type="checkbox" id="soundOpt"> Sound effects</label>
+        <label>
+          Think Time length
+          <select id="timerSecondsOpt">
+            <option value="5">5 seconds</option>
+            <option value="10">10 seconds</option>
+            <option value="15">15 seconds</option>
+            <option value="20">20 seconds</option>
+            <option value="30">30 seconds</option>
+          </select>
+        </label>
+        <label><input type="checkbox" id="autoTimerOpt"> Start Think Time automatically on each new challenge</label>
+      </div>
+
       <div class="shortcuts">
         <kbd>&rarr;</kbd> or <kbd>Space</kbd> Next &nbsp;·&nbsp;
         <kbd>&larr;</kbd> Previous &nbsp;·&nbsp;
         <kbd>Enter</kbd> Show/Hide answer &nbsp;·&nbsp;
+        <kbd>T</kbd> Think Time &nbsp;·&nbsp;
+        <kbd>B</kbd> BINGO! &nbsp;·&nbsp;
+        <kbd>M</kbd> Sound &nbsp;·&nbsp;
         <kbd>F</kbd> Fullscreen
       </div>
     </div>
